@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dfly-deployment
+  labels:
+    app: dfly
+spec:
+  strategy:
+   type: Recreate
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dfly
+  template:
+    metadata:
+      labels:
+        app: dfly
+    spec:
+      containers:
+        - name: dfly
+          imagePullPolicy: Always
+          image: 042794132985.dkr.ecr.us-east-1.amazonaws.com/dfly-app:dfly-app-build-latest
+          ports:
+           - containerPort: 8000
